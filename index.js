@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-
+const data = require('./data.json');
 // Import of the model Recipe from './models/Recipe.model.js'
 const Recipe = require('./models/Recipe.model');
 // Import of the data from './data.json'
-const data = require('./data');
 
 const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
 
@@ -25,3 +24,21 @@ mongoose
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
+// Recipe.create({
+//   title: 'Curry Goat',
+//   ingredients: 'goat meat, curry powder, onions, love',
+//   cuisine: 'Caribbrean',
+//   dishType: 'main_course',
+//   duration: 45,
+//   creator: 'Valerie Salmon'
+// }).then(res => console.log(res)).catch(err => console.log(err))
+
+// Recipe.insertMany(data)
+
+console.log(Recipe.find({},(err, recipes) => {
+  err ? console.log(err) :
+    recipes.forEach(recipe => {
+      console.log(recipe.title)
+    })
+}))
